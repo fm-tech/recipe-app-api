@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 # To get environ vars
 import os
 from pathlib import Path
-from dotenv import load_dotenv
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -28,7 +27,7 @@ SECRET_KEY = "django-insecure-60p266f0wu8=rm$yfjf^%ryq3(o%*bq)&#o#-u=a*=x2lu9-ij
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["0.0.0.0"]
+ALLOWED_HOSTS = ["0.0.0.0", "localhost"]
 
 
 # Application definition
@@ -42,6 +41,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "core",
     "books",
+    "rest_framework",
 ]
 
 MIDDLEWARE = [
@@ -81,10 +81,11 @@ WSGI_APPLICATION = "app.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "HOSTS": os.getenv("DB_HOST"),
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASS"),
+        "HOST": os.environ.get("DB_HOST"),
+        "NAME": os.environ.get("DB_NAME"),
+        "USER": os.environ.get("DB_USER"),
+        "PASSWORD": os.environ.get("DB_PASS"),
+        "PORT": os.environ.get("DB_PORT"),
     }
 }
 
@@ -129,3 +130,11 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+REST_FRAMEWORK = {
+    # Use Django's standard `django.contrib.auth` permissions,
+    # or allow read-only access for unauthenticated users.
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly"
+    ]
+}

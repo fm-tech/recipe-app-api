@@ -11,7 +11,7 @@ services:
     volumes:
       - ./app:/app
     command: >
-      /bin/sh -c "python manage.py runserver 0.0.0.0:8080"
+      /bin/sh -c "sleep 2 && python manage.py runserver 0.0.0.0:8080"
     environment:
       - DB_HOST=db
       - DB_NAME=testdb
