@@ -9,6 +9,7 @@ djangorestframework = "*"
 markdown = "*"
 django-filter = "*"
 psycopg2 = "*"
+python-dotenv = "*"
 
 [dev-packages]
 flake8 = "*"
