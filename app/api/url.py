@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework import routers, serializers, viewsets
 
 # views import
-from api.views import recipie_list, recipie_details
+from .views import recipie_list, recipie_details
 
 router = routers.DefaultRouter()
 
