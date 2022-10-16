@@ -10,6 +10,7 @@ markdown = "*"
 django-filter = "*"
 psycopg2 = "*"
 python-dotenv = "*"
+pillow = "*"
 
 [dev-packages]
 flake8 = "*"

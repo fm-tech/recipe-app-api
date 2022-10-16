@@ -1,4 +1,4 @@
-from app.books.models import Recipie
+from books.models import Recipie
 from rest_framework import serializers
 
 

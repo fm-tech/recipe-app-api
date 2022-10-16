@@ -6,6 +6,9 @@ class Image(models.Model):
     caption = models.CharField(max_length=30)
     image = models.ImageField()
 
+    def __str__(self):
+        return self.caption
+
 
 # Metata data for SEO and other Social Media Standings
 class MetaData(models.Model):
