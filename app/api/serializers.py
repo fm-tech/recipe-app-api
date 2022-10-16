@@ -3,8 +3,7 @@ from rest_framework import serializers
 
 
 class RecipieSerializer(serializers.Serializer):
-    class Meta:
-        model = Recipie
-        # Initialize fields
-        fields = ["name", "description", "active", "document", "images"]
-        read_only_fields = ["id"]
+    id = serializers.IntegerField(read_only=True)
+    name = serializers.CharField()
+    description = serializers.CharField()
+    active = serializers.BooleanField()
