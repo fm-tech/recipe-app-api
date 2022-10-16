@@ -1,4 +1,5 @@
 from email.policy import default
+from pyexpat import model
 from django.db import models
 from django.forms import JSONField
 
@@ -8,6 +9,16 @@ class Recipie(models.Model):
     description = models.CharField(max_length=50)
     active = models.BooleanField(default=True)
     document = models.JSONField(default={})
+    images = models.ManyToManyField("Image")
+
+    def __str__(self):
+        return self.name
+
+
+class Ingredient(models.Model):
+    name = models.CharField(max_length=45)
+    description = models.CharField(max_length=175)
+    in_recipie = models.ManyToManyField("Recipie")
 
     def __str__(self):
         return self.name
