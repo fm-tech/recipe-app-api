@@ -1,5 +1,3 @@
-from pyexpat import model
-from statistics import mode
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -21,3 +19,11 @@ class MetaData(models.Model):
 # Contributor adds new fields to the user model
 class Contributor(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+
+class Tag(models.Model):
+    name = models.CharField(max_length=30)
+
+
+class Categorie(models.Model):
+    name = models.CharField(max_length=50)
