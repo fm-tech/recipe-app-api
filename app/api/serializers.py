@@ -9,7 +9,8 @@ class RecipieSerializer(serializers.Serializer):
     active = serializers.BooleanField()
 
     def create(self, validated_data):
-        return Recipie.objects.create(validated_data)
+        """Creates a new Recipie given validated data"""
+        return Recipie.objects.create(**validated_data)
 
 
 class RecipieDetailed(serializers.Serializer):
