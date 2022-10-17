@@ -7,3 +7,10 @@ class RecipieSerializer(serializers.Serializer):
     name = serializers.CharField()
     description = serializers.CharField()
     active = serializers.BooleanField()
+
+    def create(self, validated_data):
+        return Recipie.objects.create(validated_data)
+
+
+class RecipieDetailed(serializers.Serializer):
+    pass

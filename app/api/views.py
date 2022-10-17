@@ -6,7 +6,7 @@ from api.serializers import RecipieSerializer
 from books.models import Recipie
 
 
-@api_view()
+@api_view(["GET"])
 @permission_classes((permissions.AllowAny,))
 def recipie_list(request):
     recipies = Recipie.objects.all()
@@ -14,8 +14,17 @@ def recipie_list(request):
     return Response(serializer.data)
 
 
-@api_view()
-def recipie_details(request, pk):
-    recipie = Recipie.objects.get(pk=pk)
-    serializer = RecipieSerializer(recipie)
-    return Return(serializer.data)
+@api_view(["GET", "POST"])
+@permission_classes((permissions.AllowAny,))
+def recipie(request, pk):
+    if request.method == "GET":
+        recipie = Recipie.objects.get(pk=pk)
+        serializer = RecipieSerializer(recipie)
+        return Response(serializer.data)
+    if request.method == "POST":
+        serializer = RecipieSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
