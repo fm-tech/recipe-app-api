@@ -6,7 +6,7 @@ from django.forms import JSONField
 # Create your models here.
 class Recipie(models.Model):
     name = models.CharField(max_length=40)
-    description = models.CharField(max_length=50)
+    description = models.CharField(max_length=250)
     active = models.BooleanField(default=True)
     document = models.JSONField(default=dict)
     images = models.ManyToManyField("core.Image", blank=True, null=True)

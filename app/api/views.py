@@ -15,12 +15,31 @@ def recipie_list(request):
     return Response(serializer.data)
 
 
-@api_view(["GET"])
+@api_view(["GET", "PUT", "DELETE"])
 @permission_classes((permissions.AllowAny,))
 def recipie(request, pk):
-    recipie = Recipie.objects.get(pk=pk)
-    serializer = RecipieSerializer(recipie)
-    return Response(serializer.data)
+    """Retrieve, update, or delete a recipie"""
+    try:
+        recipie = Recipie.objects.get(pk=pk)
+    except Recipie.DoesNotExist:
+        # return a 404 response if there is no recipe found
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == "GET":
+        serializer = RecipieSerializer(recipie)
+        return Response(serializer.data)
+
+    elif request.method == "PUT":
+        serializer = RecipieSerializer(recipie, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors)
+
+    elif request.method == "DELETE":
+        recipie.delete()
+        return Response()
 
 
 @api_view(["POST"])
