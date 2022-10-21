@@ -1,6 +1,8 @@
 from django.contrib import admin
-from core.models import Image, Contributor
+from core.models import Image, Contributor, Tag, Category, Menu, MenuItem
 
 # Register your models here.
-admin.site.register(Image)
-admin.site.register(Contributor)
+
+core_models = [Image, Contributor, Tag, Category, Menu, MenuItem]
+
+admin.site.register(core_models)

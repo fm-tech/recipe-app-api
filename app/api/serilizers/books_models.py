@@ -1,4 +1,3 @@
-from dataclasses import field, fields
 from books.models import Recipie
 from rest_framework import serializers
 
